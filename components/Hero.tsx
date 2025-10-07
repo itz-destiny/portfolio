@@ -1,16 +1,14 @@
 import { FaLocationArrow } from "react-icons/fa6";
-
+import { PixelatedCanvas } from "@/components/ui/pixelated-canvas";
 import MagicButton from "./MagicButton";
 import { Spotlight } from "./ui/Spotlight";
 import { TextGenerateEffect } from "./ui/TextGenerateEffect";
+import { ContainerTextFlip } from "@/components/ui/container-text-flip";
 
 const Hero = () => {
   return (
-    <div className="pb-20 pt-36">
-      {/**
-       *  UI: Spotlights
-       *  Link: https://ui.aceternity.com/components/spotlight
-       */}
+    <section className="relative pb-40 pt-56 w-full h-full">
+      {/* Background Spotlights */}
       <div>
         <Spotlight
           className="-top-40 -left-10 md:-left-32 md:-top-20 h-screen"
@@ -20,47 +18,71 @@ const Hero = () => {
           className="h-[80vh] w-[50vw] top-10 left-full"
           fill="purple"
         />
-        <Spotlight className="left-80 top-28 h-[80vh] w-[50vw]" fill="blue" />
+        <Spotlight className="left-80 top-28 h-[100vh] w-[50vw]" fill="white" />
       </div>
 
-      {/**
-       *  UI: grid
-       *  change bg color to bg-black-100 and reduce grid color from
-       *  0.2 to 0.03
-       */}
+      {/* Background Grid */}
       <div
         className="h-screen w-full dark:bg-black-100 bg-white dark:bg-grid-white/[0.03] bg-grid-black-100/[0.2]
-       absolute top-0 left-0 flex items-center justify-center"
+       absolute top-0 left-0"
       >
-        {/* Radial gradient for the container to give a faded look */}
         <div
-          // chnage the bg to bg-black-100, so it matches the bg color and will blend in
           className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black-100
          bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"
         />
       </div>
 
-      <div className="flex justify-center relative my-20 z-10">
-        <div className="max-w-[89vw] md:max-w-2xl lg:max-w-[60vw] flex flex-col items-center justify-center">
-          <p className="uppercase tracking-widest text-xs text-center text-blue-100 max-w-80">
-            Dynamic Web Magic with Next.js
-          </p>
+      {/* Hero Content */}
+      <div className="relative z-10 flex flex-col lg:flex-row items-center justify-center mx-auto max-w-7xl px-6 lg:px-12 space-y-12 lg:space-y-0 lg:space-x-16">
+        {/* Profile Picture */}
+        <div className="flex-shrink-0">
+          <PixelatedCanvas
+            src="/profile.jpg"
+            width={300} // Adjusted size for better balance
+            height={400}
+            cellSize={3}
+            dotScale={0.9}
+            shape="square"
+            backgroundColor="#000000"
+            dropoutStrength={0.1}
+            interactive
+            distortionStrength={1}
+            distortionRadius={80}
+            distortionMode="swirl"
+            followSpeed={0.2}
+            jitterStrength={4}
+            jitterSpeed={4}
+            sampleAverage
+            tintColor="#FFFFFF"
+            tintStrength={0.2}
+            className="rounded-xl border border-neutral-800 shadow-lg"
+          />
+        </div>
 
-          {/**
-           *  Link: https://ui.aceternity.com/components/text-generate-effect
-           *
-           *  change md:text-6xl, add more responsive code
-           */}
+        {/* Text Content */}
+        <div className="flex flex-col items-start text-left">
+
           <TextGenerateEffect
-            words="Transforming Concepts into Seamless User Experiences"
-            className="text-center text-[40px] md:text-5xl lg:text-6xl"
+            words="Transforming Concepts into Digital Realities"
+            className="text-left text-[28px] sm:text-[32px] md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight"
           />
 
-          <p className="text-center md:tracking-wider mb-4 text-sm md:text-lg lg:text-2xl">
-            Hi! I&apos;m Adrian, a Next.js Developer based in Croatia.
+          <p className="mt-4 md:tracking-wider text-sm sm:text-base md:text-lg lg:text-xl">
+            Hi! I&apos;m Destiny, a{" "}
+            <span className="text-sm sm:text-base md:text-lg lg:text-xl font-medium">
+              <ContainerTextFlip className="text-sm sm:text-base md:text-lg lg:text-xl font-medium"
+                words={[
+                  "Web Developer",
+                  "Web Designer",
+                  "Programmer",
+                  "AI Enthusiast",
+                ]}
+              />
+            </span>{" "}
+            based in Nigeria.
           </p>
 
-          <a href="#about">
+          <a href="#about" className="mt-6">
             <MagicButton
               title="Show my work"
               icon={<FaLocationArrow />}
@@ -69,7 +91,7 @@ const Hero = () => {
           </a>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
