@@ -1,3 +1,4 @@
+"use client";
 import { FaLocationArrow } from "react-icons/fa6";
 import { PixelatedCanvas } from "@/components/ui/pixelated-canvas";
 import MagicButton from "./MagicButton";
