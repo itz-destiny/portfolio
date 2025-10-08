@@ -34,29 +34,33 @@ export const BackgroundGradientAnimation = ({
   containerClassName?: string;
 }) => {
   const interactiveRef = useRef<HTMLDivElement>(null);
-
   const [curX, setCurX] = useState(0);
   const [curY, setCurY] = useState(0);
   const [tgX, setTgX] = useState(0);
   const [tgY, setTgY] = useState(0);
+  const [mounted, setMounted] = useState(false);
+  const [isSafari, setIsSafari] = useState(false);
+
   useEffect(() => {
-    document.body.style.setProperty(
-      "--gradient-background-start",
-      gradientBackgroundStart
-    );
-    document.body.style.setProperty(
-      "--gradient-background-end",
-      gradientBackgroundEnd
-    );
-    document.body.style.setProperty("--first-color", firstColor);
-    document.body.style.setProperty("--second-color", secondColor);
-    document.body.style.setProperty("--third-color", thirdColor);
-    document.body.style.setProperty("--fourth-color", fourthColor);
-    document.body.style.setProperty("--fifth-color", fifthColor);
-    document.body.style.setProperty("--pointer-color", pointerColor);
-    document.body.style.setProperty("--size", size);
-    document.body.style.setProperty("--blending-value", blendingValue);
-  }, []);
+    setMounted(true);
+    setIsSafari(/^((?!chrome|android).)*safari/i.test(navigator.userAgent));
+
+    const style = document.body.style;
+    style.setProperty("--gradient-background-start", gradientBackgroundStart);
+    style.setProperty("--gradient-background-end", gradientBackgroundEnd);
+    style.setProperty("--first-color", firstColor);
+    style.setProperty("--second-color", secondColor);
+    style.setProperty("--third-color", thirdColor);
+    style.setProperty("--fourth-color", fourthColor);
+    style.setProperty("--fifth-color", fifthColor);
+    style.setProperty("--pointer-color", pointerColor);
+    style.setProperty("--size", size);
+    style.setProperty("--blending-value", blendingValue);
+  }, [gradientBackgroundStart, gradientBackgroundEnd, firstColor, secondColor, thirdColor, fourthColor, fifthColor, pointerColor, size, blendingValue]);
+
+  if (!mounted) {
+    return null;
+  }
 
   useEffect(() => {
     function move() {
@@ -81,10 +85,6 @@ export const BackgroundGradientAnimation = ({
     }
   };
 
-  const [isSafari, setIsSafari] = useState(false);
-  useEffect(() => {
-    setIsSafari(/^((?!chrome|android).)*safari/i.test(navigator.userAgent));
-  }, []);
 
   return (
     <div

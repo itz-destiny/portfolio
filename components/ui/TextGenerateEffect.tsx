@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion, stagger, useAnimate } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -11,32 +11,37 @@ export const TextGenerateEffect = ({
   className?: string;
 }) => {
   const [scope, animate] = useAnimate();
+  const [mounted, setMounted] = useState(false);
   let wordsArray = words.split(" ");
   useEffect(() => {
-    console.log(wordsArray);
-    animate(
-      "span",
-      {
-        opacity: 1,
-      },
-      {
-        duration: 2,
-        delay: stagger(0.2),
-      }
-    );
-  }, [scope.current]);
+    setMounted(true);
+    if (mounted) {
+      animate(
+        "span",
+        {
+          opacity: 1,
+        },
+        {
+          duration: 2,
+          delay: stagger(0.2),
+        }
+      );
+    }
+  }, [mounted, animate]);
+
+  if (!mounted) {
+    return null;
+  }
 
   const renderWords = () => {
     return (
       <motion.div ref={scope}>
         {wordsArray.map((word, idx) => {
           return (
-            <motion.span
-              key={word + idx}
-              // change here if idx is greater than 3, change the text color to #CBACF9
-              className={` ${idx > 3 ? "text-purple" : "dark:text-white text-black"
-                } opacity-0`}
-            >
+          <motion.span
+            key={word + idx}
+            className={`${idx > 3 ? "text-purple" : "dark:text-white text-black"} opacity-0`}
+          >
               {word}{" "}
             </motion.span>
           );

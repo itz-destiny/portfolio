@@ -1,6 +1,5 @@
 "use client";
 import { FaLocationArrow } from "react-icons/fa6";
-import { PixelatedCanvas } from "@/components/ui/pixelated-canvas";
 import MagicButton from "./MagicButton";
 import { Spotlight } from "./ui/Spotlight";
 import { TextGenerateEffect } from "./ui/TextGenerateEffect";
@@ -35,34 +34,18 @@ const Hero = () => {
 
       {/* Hero Content */}
       <div className="relative z-10 flex flex-col lg:flex-row items-center justify-center mx-auto max-w-7xl px-6 lg:px-12 space-y-12 lg:space-y-0 lg:space-x-16">
+        
         {/* Profile Picture */}
         <div className="flex-shrink-0">
-          <PixelatedCanvas
+          <img
             src="/profile.jpg"
-            width={300} // Adjusted size for better balance
-            height={400}
-            cellSize={3}
-            dotScale={0.9}
-            shape="square"
-            backgroundColor="#000000"
-            dropoutStrength={0.1}
-            interactive
-            distortionStrength={1}
-            distortionRadius={80}
-            distortionMode="swirl"
-            followSpeed={0.2}
-            jitterStrength={4}
-            jitterSpeed={4}
-            sampleAverage
-            tintColor="#FFFFFF"
-            tintStrength={0.2}
-            className="rounded-xl border border-neutral-800 shadow-lg"
+            alt="Profile"
+            className="w-72 h-72 object-cover rounded-full border border-neutral-800 shadow-lg"
           />
         </div>
 
         {/* Text Content */}
         <div className="flex flex-col items-start text-left">
-
           <TextGenerateEffect
             words="Transforming Concepts into Digital Realities"
             className="text-left text-[28px] sm:text-[32px] md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight"
@@ -71,7 +54,8 @@ const Hero = () => {
           <p className="mt-4 md:tracking-wider text-sm sm:text-base md:text-lg lg:text-xl">
             Hi! I&apos;m Destiny, a{" "}
             <span className="text-sm sm:text-base md:text-lg lg:text-xl font-medium">
-              <ContainerTextFlip className="text-sm sm:text-base md:text-lg lg:text-xl font-medium"
+              <ContainerTextFlip
+                className="text-sm sm:text-base md:text-lg lg:text-xl font-medium"
                 words={[
                   "Web Developer",
                   "Web Designer",
